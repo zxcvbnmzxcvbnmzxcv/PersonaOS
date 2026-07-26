@@ -12,16 +12,19 @@
   </style>
 </head>
 
-
-
 <body style="background-image:url(background.jpg); background-size:cover; margin:0;">
  
+
+
   <div style="display: flex; justify-content: space-between;">
-    <p>PERSONAOS</p>
-    <p>MADE BY AMANOJAKU</p>
-    <p id="timeElement">Time</p>
+    <h1 id="welcomeopen"> P E R S O N A  O S </h1>
+    <h1 id="timeElement">Time</h1>
+    <h1> Font by KanjiPlaysInc </h1>
   </div>
  
+
+
+
   <div id="window" style="
     position: absolute;
     top: 50%;
@@ -31,6 +34,7 @@
     height: 220px;
     box-sizing: border-box;
     padding: 30px 40px;
+    
   ">
  
     <svg viewBox="0 0 400 220" width="400" height="220" style="position: absolute; top: 0; left: 0; pointer-events: none;">
@@ -39,16 +43,19 @@
     </svg>
  
     <div id="windowheader" style="width: 300px; height: 60px; cursor: move;">
-      <img src="drag.png" width="300" height="100" style="position: absolute; left: 50px; top: 20px;">
+      <img src="drag.png" width="300" height="100" style="position: absolute; left: 300px; top: 75px;">
     </div>
  
-    <h1>Welcome to PersonaOS</h1>
-    <h2>ok</h2>
-    <p>Hello world!</p>
-    <a href="https://coolmathgames.com/">Game</a>
+    <h1 style="position: relative;z-index: 1;font-size: 65px;bottom:50px;right:15px"> Welcome </h1>
+    <p style="cursor: pointer;position:relative;bottom:200px" id="welcomeclose">Close</p>
  
   </div>
  
+
+
+
+
+
   <script src="script.js"></script>
 </body>
 </html>
