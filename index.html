@@ -1,0 +1,55 @@
+<html>
+<head>
+  <style>
+    @font-face {
+      font-family: 'personafont';
+      src: url('personafont.ttf') format('truetype');
+    }
+
+    body {
+      font-family: 'personafont', sans-serif;
+    }
+  </style>
+</head>
+
+
+
+<body style="background-image:url(background.jpg); background-size:cover; margin:0;">
+ 
+  <div style="display: flex; justify-content: space-between;">
+    <p>PERSONAOS</p>
+    <p>MADE BY AMANOJAKU</p>
+    <p id="timeElement">Time</p>
+  </div>
+ 
+  <div id="window" style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 220px;
+    box-sizing: border-box;
+    padding: 30px 40px;
+  ">
+ 
+    <svg viewBox="0 0 400 220" width="400" height="220" style="position: absolute; top: 0; left: 0; pointer-events: none;">
+      <polygon points="0,0 332,73 376,196 8,202" fill="black" />
+      <polygon points="24,20 316,63 358,180 26,184" fill="white" />
+    </svg>
+ 
+    <div id="windowheader" style="width: 300px; height: 60px; cursor: move;">
+      <img src="drag.png" width="300" height="100" style="position: absolute; left: 50px; top: 20px;">
+    </div>
+ 
+    <h1>Welcome to PersonaOS</h1>
+    <h2>ok</h2>
+    <p>Hello world!</p>
+    <a href="https://coolmathgames.com/">Game</a>
+ 
+  </div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+ 
