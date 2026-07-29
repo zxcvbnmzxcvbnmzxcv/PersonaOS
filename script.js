@@ -175,7 +175,6 @@ function handleWindowTap(element) {
 function initializeWindow(elementName) {
   var screen = document.querySelector("#" + elementName)
   addWindowTapHandling(screen)
-  makeClosable(elementName)
   dragElement(screen)
 }
 
@@ -294,6 +293,92 @@ var content = [
   }
 
 ]
+
+
+var backgroundsContent = [];
+
+for (let i = 1; i<=15;i++){
+  var filename = "coolbackgrounds/background" + i + ".png";
+  backgroundsContent.push({
+    title: "Background " + i,
+    date: "",
+    content: `
+    <img src="${filename}" style="width: 100%;border-radius:12px;">
+    <br><br>
+    <button class = "choose-bg" data-image = "${filename}">Choose</button>
+    
+    `
+  })
+
+
+
+}
+
+function setbackgroundscontent(index){
+  var backgroundspageContent = document.querySelector("#backgroundspageContent");
+  backgroundspageContent.innerHTML = backgroundsContent[index].content;
+
+  var chooseButton = backgroundspageContent.querySelector(".choose-bg");
+  chooseButton.addEventListener("click",function() {
+    var imageFile = chooseButton.getAttribute("data-image")
+    document.body.style.backgroundImage = "url(" + imageFile + ")";
+  });
+
+
+}
+
+function addToBackgroundsSideBar(index) {
+  var sidebar = document.querySelector("#backgroundssidebar");
+  var bg = backgroundsContent[index];
+
+  var newDiv = document.createElement("div");
+  newDiv.style.cursor = "pointer";
+  newDiv.style.padding = "8px";
+  newDiv.style.marginBottom = "8px";
+  newDiv.style.borderRadius = "8px";
+  newDiv.style.backgroundColor = "#f2f2f2";
+
+  newDiv.innerHTML = `<p style="margin: 0px; font-weight: bold; font-size: 14px;">${bg.title}</p>`;
+
+  newDiv.addEventListener("click", function() {
+    setbackgroundscontent(index);
+  });
+    sidebar.appendChild(newDiv);
+}
+
+
+for (let i = 0; i < backgroundsContent.length; i++) {
+  addToBackgroundsSideBar(i);
+}
+setbackgroundscontent(0);
+
+var currentBackgroundsPage = 0;
+function flipBackgroundsPage() {
+  var nextIndex = currentBackgroundsPage + 1;
+  if (nextIndex >= backgroundsContent.length) nextIndex = 0;
+  setBackgroundsPageContent(nextIndex);
+  currentBackgroundsPage = nextIndex;
+}
+document.querySelector("#backgroundsnextPageButton").addEventListener("click", flipBackgroundsPage);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function setPageContent(index) {
 
