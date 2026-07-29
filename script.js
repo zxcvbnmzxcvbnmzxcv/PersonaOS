@@ -127,20 +127,20 @@ function handleIconTap(element,screen) {
 dragElement(document.querySelector("#bear"))
 
 var bearIcon = document.querySelector("#bearopen"); 
-
-
 var bearScreen = document.querySelector("#bear")
 var windowsScreen = document.querySelector("#windows")
-
 var bearScreenClose = document.querySelector("#bearclose")
-
 bearScreenClose.addEventListener("click", () => closeWindow(bearScreen));
-
 var backgroundsScreen = document.querySelector("#backgrounds")
-
 var backgroundsScreenClose = document.querySelector("#backgroundsclose")
-
 backgroundsScreenClose.addEventListener("click", () => closeWindow(backgroundsScreen));
+
+
+var morganaScreen = document.querySelector("#morgana");
+var morganaScreenClose = document.querySelector("#morganaclose");
+morganaScreenClose.addEventListener("click", () => closeWindow(morganaScreen));
+dragElement(morganaScreen);
+addWindowTapHandling(morganaScreen);
 
 
 var biggestIndex = 1;
@@ -185,6 +185,7 @@ icon.addEventListener("click", () => handleIconTap(icon, screen));
 }
 initializeIcon("bear")
 initializeIcon("backgrounds")
+initializeIcon("morgana")
 
 
 
@@ -305,7 +306,7 @@ for (let i = 1; i<=15;i++){
     content: `
     <img src="${filename}" style="width: 100%;border-radius:12px;">
     <br><br>
-    <button class = "choose-bg" data-image = "${filename}">Choose</button>
+    <button style="font-family:'personafont';font-size:85px"class = "choose-bg" data-image = "${filename}">Choose</button>
     
     `
   })
@@ -318,6 +319,8 @@ function setbackgroundscontent(index){
   var backgroundspageContent = document.querySelector("#backgroundspageContent");
   backgroundspageContent.innerHTML = backgroundsContent[index].content;
 
+  currentBackgroundsPage = index;
+  
   var chooseButton = backgroundspageContent.querySelector(".choose-bg");
   chooseButton.addEventListener("click",function() {
     var imageFile = chooseButton.getAttribute("data-image")
@@ -356,7 +359,7 @@ var currentBackgroundsPage = 0;
 function flipBackgroundsPage() {
   var nextIndex = currentBackgroundsPage + 1;
   if (nextIndex >= backgroundsContent.length) nextIndex = 0;
-  setBackgroundsPageContent(nextIndex);
+  setbackgroundscontent(nextIndex);
   currentBackgroundsPage = nextIndex;
 }
 document.querySelector("#backgroundsnextPageButton").addEventListener("click", flipBackgroundsPage);
@@ -427,6 +430,65 @@ function flipPage(){
 }
 
 document.querySelector("#nextPageButton").addEventListener("click", flipPage);
+
+var morganaCount = 0;
+
+var morganaClicker = document.querySelector("#morganaClicker");
+var morganaCountDisplay = document.querySelector("#morganaCount");
+var Mona = document.querySelector("#morganamessage");
+
+morganaClicker.addEventListener("click",function(){
+  morganaCount++;
+  morganaCountDisplay.textContent = morganaCount;
+
+  var random5 = Math.floor(Math.random()*15)+1;
+
+  morganaClicker.src = "morganapics/morgana" + random5 +".jpeg"
+
+
+  if(morganaCount <5){Mona.textContent = "Noob clicker.";
+  }
+  else if (morganaCount < 20)
+    {Mona.textContent = "Go to SLEEP";
+  }
+  else if (morganaCount < 80)
+    {Mona.textContent = "Not a Cat";
+  }
+  else if (morganaCount < 140)
+    {Mona.textContent = "Advanced Clicker";
+  }
+  else if (morganaCount < 220)
+    {Mona.textContent = "Meow";
+  }
+  else if (morganaCount < 270)
+    {Mona.textContent = "PERSONA";
+  }
+  else if (morganaCount < 340)
+    {Mona.textContent = "Pro Clicker";
+  }
+  else if (morganaCount < 390)
+    {Mona.textContent = "God Clicker";
+  }
+  else if (morganaCount < 460)
+    {Mona.textContent = "Epic Clicker";
+  }
+  else if (morganaCount < 600)
+    {Mona.textContent = "Morgana Fan";
+  }
+  else if (morganaCount < 700)
+    {Mona.textContent = "Morgana Lover";
+  }
+  else if (morganaCount < 850)
+    {Mona.textContent = "Morgana Pro";
+  }
+  else if (morganaCount < 1000)
+    {Mona.textContent = "Morgana Obsessed";
+  }
+
+
+
+
+});
 
 
 
