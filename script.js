@@ -133,6 +133,7 @@ bearIcon.addEventListener("click", function() {
 });
 
 var bearScreen = document.querySelector("#bear")
+var windowsScreen = document.querySelector("#windows")
 
 var bearScreenClose = document.querySelector("#bearclose")
 
@@ -172,6 +173,13 @@ function initializeWindow(elementName) {
   dragElement(screen)
 }
 
+function initializeIcon(name) {
+var icon = document.querySelector("#" + name + "open")
+var screen = document.querySelector("#" + name)
+icon.addEventListener("click", () => handleIconTap(icon, screen));
+}
+initializeIcon("bear")
+initializeIcon("backgrounds")
 
 
 
