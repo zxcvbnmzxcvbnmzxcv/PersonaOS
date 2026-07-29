@@ -1,5 +1,7 @@
 <html>
 <head>
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
   <style>
     @font-face {
       font-family: 'personafont';
@@ -12,44 +14,72 @@
   </style>
 </head>
 
-<body style="background-image:url(background.jpg); background-size:cover; margin:0;">
- 
-
-
-  <div style="display: flex; justify-content: space-between;">
+<body style="background-image:url(background.png); background-size:cover; margin:0;">
+  <div id= top style="display: flex; justify-content: space-between;">
     <h1 id="welcomeopen"> P E R S O N A  O S </h1>
     <h1 id="timeElement">Time</h1>
     <h1> Font by KanjiPlaysInc </h1>
   </div>
- 
 
-
-
-  <div id="window" style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 220px;
-    box-sizing: border-box;
-    padding: 30px 40px;
-    
-  ">
+  <div class= "fenetre" id="window">
  
     <svg viewBox="0 0 400 220" width="400" height="220" style="position: absolute; top: 0; left: 0; pointer-events: none;">
       <polygon points="0,0 332,73 376,196 8,202" fill="black" />
       <polygon points="24,20 316,63 358,180 26,184" fill="white" />
     </svg>
  
-    <div id="windowheader" style="width: 300px; height: 60px; cursor: move;">
+    <div class= "fenetreheader" id="windowheader">
       <img src="drag.png" width="300" height="100" style="position: absolute; left: 300px; top: 75px;">
     </div>
  
     <h1 style="position: relative;z-index: 1;font-size: 65px;bottom:50px;right:15px"> Welcome </h1>
-    <p style="cursor: pointer;position:relative;bottom:200px" id="welcomeclose">Close</p>
+
+
+    <p class="closebutton" id="welcomeclose">Close</p>
  
   </div>
+
+
+
+    <div id="desktopApps" style="padding-top: 660px;">
+    <div style="text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+      <img id="bearopen"src="bear.jpeg" style="width: 67px; height: 67px; border-radius: 16px;">
+      <p style="margin: 0px; color: #090000;font-size:20px ">Bear and Bird</p>
+    </div>
+  </div>
+
+
+
+
+    <div class="fenetre" id="bear" style="top: calc(50% - 240px); left: calc(50% - 260px); display:none">
+      <svg preserveAspectRatio="none" viewBox="0 0 400 220" width="320" height="100" style="bottom:100px;position: absolute; left: 20px; pointer-events: none;">
+      <polygon points="5,5 337,78 381,201 12,207" fill="black" />
+      <polygon points="29,25 321,68 363,185 31,189" fill="white" />
+    </svg>
+    <div class="fenetreheader" id="bearheader">
+      <div style="color:red;font-size:40px;top:530px;left:20px" class="closebutton" id="bearclose">
+        CLOSE
+      </div>
+
+
+      
+
+
+
+      <p class="headertext">Bear and Bird</p>
+      <div style="width: 16px; margin-right: 6x; height: 16px;"></div>
+    </div>
+    <div style="border:10px solid black; background-color: #fff; margin: 6px; width: 520px; height: 480px; padding: 16px; font-family: sans-serif; display: flex; flex-direction: column;">
+      <div style="display: flex; flex: 1; overflow: hidden;">
+        <div id="sidebar" style="width: 140px; margin-right: 16px; overflow-y: auto;"></div>
+        <div id="pageContent" style="flex: 1; overflow-y: auto;"></div>
+      </div>
+      <button id="nextPageButton" style="position:absolute;background-color:transparent;top:555px;font-size:50px;font-family: 'personafont'; align-self: flex-end; border: none; color: red; cursor: pointer;">Next</button>
+    </div>
+  </div>
+
+
+
  
 
 
