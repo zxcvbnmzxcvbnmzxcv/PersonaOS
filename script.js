@@ -115,10 +115,10 @@ function deselectIcon(element) {
   selectedIcon = undefined
 }
 
-function handleIconTap(element) {
+function handleIconTap(element,screen) {
   if (element.classList.contains("selected")) {
     deselectIcon(element)
-    openWindow(bearScreen)
+    openWindow(screen)
   } else {
     selectIcon(element)
   }
@@ -128,9 +128,6 @@ dragElement(document.querySelector("#bear"))
 
 var bearIcon = document.querySelector("#bearopen"); 
 
-bearIcon.addEventListener("click", function() {
-  handleIconTap(bearIcon);
-});
 
 var bearScreen = document.querySelector("#bear")
 var windowsScreen = document.querySelector("#windows")
@@ -138,6 +135,13 @@ var windowsScreen = document.querySelector("#windows")
 var bearScreenClose = document.querySelector("#bearclose")
 
 bearScreenClose.addEventListener("click", () => closeWindow(bearScreen));
+
+var backgroundsScreen = document.querySelector("#backgrounds")
+
+var backgroundsScreenClose = document.querySelector("#backgroundsclose")
+
+backgroundsScreenClose.addEventListener("click", () => closeWindow(backgroundsScreen));
+
 
 var biggestIndex = 1;
 
@@ -149,6 +153,8 @@ function addWindowTapHandling(element) {
 
 addWindowTapHandling(window)
 addWindowTapHandling(bearScreen)
+addWindowTapHandling(backgroundsScreen)
+dragElement(backgroundsScreen)
 
 var topBar = document.querySelector("#top")
 
