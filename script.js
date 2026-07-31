@@ -113,6 +113,31 @@ function deselectIcon(element) {
   selectedIcon = undefined
 }
 
+document.addEventListener("click", function(e) {
+  if (selectedIcon && !selectedIcon.contains(e.target)) {
+    deselectIcon(selectedIcon);
+  }
+});
+
+var morganaClickPower = 1;
+var morganaUpgradeCost = 300;
+
+var morganaUpgradeButton = document.querySelector("#morganaUpgrade");
+var morganaUpgradeCostDisplay = document.querySelector("#morganaUpgradeCost");
+var morganaPowerDisplay = document.querySelector("#morganaPowerDisplay");
+
+morganaUpgradeButton.addEventListener("click", function() {
+  if (morganaCount >= morganaUpgradeCost) {
+    morganaCount -= morganaUpgradeCost;
+    morganaClickPower += 1;
+    morganaUpgradeCost += 100;
+
+    morganaCountDisplay.textContent = morganaCount;
+    morganaPowerDisplay.textContent = morganaClickPower;
+    morganaUpgradeCostDisplay.textContent = morganaUpgradeCost;
+  }
+});
+
 function handleIconTap(element,screen) {
   if (element.classList.contains("selected")) {
     deselectIcon(element)
@@ -222,9 +247,20 @@ function initializeWindow(elementName) {
 }
 
 function initializeIcon(name) {
-var icon = document.querySelector("#" + name + "open")
-var screen = document.querySelector("#" + name)
-icon.addEventListener("click", () => handleIconTap(icon, screen));
+  var icon = document.querySelector("#" + name + "open")
+  var screen = document.querySelector("#" + name)
+
+  icon.addEventListener("click", () => {
+    if (icon.classList.contains("selected")) {
+      deselectIcon(icon);
+      openWindow(screen);
+    } else {
+      if (selectedIcon) {
+        deselectIcon(selectedIcon);
+      }
+      selectIcon(icon);
+    }
+  });
 }
 initializeIcon("bear")
 initializeIcon("backgrounds")
@@ -482,7 +518,7 @@ var morganaCountDisplay = document.querySelector("#morganaCount");
 var Mona = document.querySelector("#morganamessage");
 
 morganaClicker.addEventListener("click",function(){
-  morganaCount++;
+  morganaCount += morganaClickPower;
   morganaCountDisplay.textContent = morganaCount;
 
   var random5 = Math.floor(Math.random()*15)+1;
