@@ -140,6 +140,25 @@ morganaScreenClose.addEventListener("click", () => closeWindow(morganaScreen));
 dragElement(morganaScreen);
 addWindowTapHandling(morganaScreen);
 
+
+
+
+initializeWindow("browser")
+initializeIcon("browser")
+document.querySelector("#browserclose").addEventListener("click", () => closeWindow(document.querySelector("#browser")));
+
+function searchWikipedia() {
+  var query = document.querySelector("#wikipediaSearchInput").value;
+  if (query.trim() === "") return;
+  var frame = document.querySelector("#wikipediaFrame");
+  frame.src = "https://en.wikipedia.org/wiki/Special:Search?search=" + encodeURIComponent(query) + "&go=Go";
+}
+
+document.querySelector("#wikipediaSearchButton").addEventListener("click", searchWikipedia);
+document.querySelector("#wikipediaSearchInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") searchWikipedia();
+});
+
 initializeWindow("calendar")
 initializeIcon("calendar")
 document.querySelector("#calendarclose").addEventListener("click", () => closeWindow(document.querySelector("#calendar")));
@@ -534,8 +553,8 @@ function buildMonthGridHTML(year,month){
 
   for (var day = 1; day <= daysInMonth; day++) {
     var isToday = isCurrentMonth && day === todayDate;
-    var bg = isToday ? "#ff0000" : "#f2f2f2";
-    var color = isToday ? "white" : "#333";
+    var bg = isToday ? "#ff0000" : "#000000";
+    var color = isToday ? "white" : "white";
     var fontWeight = isToday ? "bold" : "normal";
     html += `<div style="display:flex;align-items:center;justify-content:center;font-family:'personafont';font-size:25px;background-color:${bg};color:${color};font-weight:${fontWeight};">${day}</div>`;
   }
