@@ -165,6 +165,21 @@ document.querySelector("#calendarclose").addEventListener("click", () => closeWi
 
 
 
+initializeWindow("paint")
+initializeIcon("paint")
+document.querySelector("#paintclose").addEventListener("click", () => closeWindow(document.querySelector("#paint")));
+
+
+
+initializeWindow("banjo")
+initializeIcon("banjo")
+document.querySelector("#banjoclose").addEventListener("click", () => closeWindow(document.querySelector("#banjo")));
+
+
+
+
+
+
 
 var biggestIndex = 1;
 
@@ -628,6 +643,58 @@ function flipCalendarPage() {
   setCalendarPageContent(nextIndex);
 }
 document.querySelector("#calendarnextPageButton").addEventListener("click", flipCalendarPage);
+
+var paintCanvas = document.querySelector("#paintCanvas");
+var paintCtx = paintCanvas.getContext("2d");
+var paintColorInput = document.querySelector("#paintColor");
+var paintBrushSizeInput = document.querySelector("#paintBrushSize");
+var isPainting = false;
+var lastX = 0;
+var lastY = 0;
+
+function getCanvasCoords(e){
+  var rect = paintCanvas.getBoundingClientRect();
+  return{
+     x: (e.clientX - rect.left) * (paintCanvas.width / rect.width),
+    y: (e.clientY - rect.top) * (paintCanvas.height / rect.height)
+  };
+}
+
+paintCanvas.addEventListener("mousedown",function(e){
+  isPainting = true;
+  var pos = getCanvasCoords(e);
+  lastX = pos.x;
+  lastY = pos.y;
+
+});
+
+paintCanvas.addEventListener("mousemove",function(e){
+  if(!isPainting) return;
+  var pos = getCanvasCoords(e);
+  paintCtx.strokeStyle = paintColorInput.value;
+  paintCtx.lineWidth = paintBrushSizeInput.value;
+  paintCtx.lineCap = "round";
+  paintCtx.beginPath();
+  paintCtx.moveTo(lastX, lastY);
+  paintCtx.lineTo(pos.x, pos.y);
+  paintCtx.stroke();
+  lastX = pos.x;
+  lastY = pos.y;
+});
+
+
+window.addEventListener("mouseup", function() {
+  isPainting = false;
+});
+
+document.querySelector("#paintClear").addEventListener("click", function() {
+  paintCtx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+});
+
+
+
+
+
 
 
 
