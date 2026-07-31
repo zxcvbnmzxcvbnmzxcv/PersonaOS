@@ -177,6 +177,11 @@ document.querySelector("#banjoclose").addEventListener("click", () => closeWindo
 
 
 
+initializeWindow("message")
+initializeIcon("message")
+document.querySelector("#messageclose").addEventListener("click", () => closeWindow(document.querySelector("#message")));
+
+
 
 
 
@@ -691,15 +696,46 @@ document.querySelector("#paintClear").addEventListener("click", function() {
   paintCtx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
 });
 
+document.querySelector("#messageSend").addEventListener("click",function(){
 
+var name = document.querySelector("#messageName").value;
+var email = document.querySelector("#messageEmail").value;
+var body = document.querySelector("#messageBody").value;
+var status = document.querySelector("#messageStatus");
 
+if(body.trim() === ""){
+status.textContent = "Type your message here.";
+return;
 
+}
 
+status.textContent = "sending..";
 
+var formdata = new FormData();
 
+formdata.append("name",name);
+formdata.append("email",email);
+formdata.append("message",body);
 
-
-
+fetch("https://formspree.io/f/xdaqvqvz", {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: formdata
+  })
+    .then(function(response) {
+      if (response.ok) {
+        status.textContent = "Message sent. I received that in my email..";
+        document.querySelector("#messageName").value = "";
+        document.querySelector("#messageEmail").value = "";
+        document.querySelector("#messageBody").value = "";
+      } else {
+        status.textContent = "Something went wrong — try again.";
+      }
+    })
+    .catch(function() {
+      status.textContent = "Something went wrong — try again.";
+    });
+});
 
 
 

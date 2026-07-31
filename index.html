@@ -115,6 +115,16 @@
       
     </div>
 
+
+    <div id = "messageopen" style="text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+
+      <img src="messageicon.jpeg" style="width: 67px; height: 67px; border-radius: 16px;">
+      <p style="margin: 0px; color: #090000;font-size:20px ">Message</p>
+      
+    </div>
+
+
+
     
 
 
@@ -306,6 +316,31 @@
     <iframe style="position:absolute;left:60px;"src="https://www.retrogames.cc/embed/32914-banjo-kazooie-usa.html" width="600" height="480" frameborder="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="cross-origin-isolated"></iframe>
     </div>
     </div>
+
+
+
+
+
+<div class="fenetre" id="message" style="top: calc(50% - 240px); left: calc(50% - 260px); display:none">
+  <svg preserveAspectRatio="none" viewBox="0 0 400 220" width="320" height="100" style="bottom:100px;position: absolute; left: 20px; pointer-events: none;">
+    <polygon points="5,5 337,78 381,201 12,207" fill="black" />
+    <polygon points="29,25 321,68 363,185 31,189" fill="white" />
+  </svg>
+  <div class="fenetreheader" id="messageheader">
+    <div style="color:rgb(0, 0, 0);font-size:25px;top:500px;left:20px" class="closebutton" id="messageclose">
+      CLOSE
+    </div>
+    <p class="headertext">Message Me</p>
+    <div style="width: 16px; margin-right: 6x; height: 16px;"></div>
+  </div>
+  <div style="border:10px solid black; background-color: #fff; margin: 6px; width: 520px; height: 480px; padding: 16px; font-family: sans-serif; display: flex; flex-direction: column; box-sizing: border-box;">
+    <input id="messageName" type="text" placeholder="Your name" style="padding:8px; margin-bottom:8px; font-size:14px; border:2px solid black; border-radius:4px;">
+    <input id="messageEmail" type="email" placeholder="Your email (so I can reply)" style="padding:8px; margin-bottom:8px; font-size:14px; border:2px solid black; border-radius:4px;">
+    <textarea id="messageBody" placeholder="Your message..." style="flex:1; padding:8px; margin-bottom:8px; font-size:14px; border:2px solid black; border-radius:4px; resize:none;"></textarea>
+    <button id="messageSend" style="padding:10px; font-family:'personafont'; font-size:20px; background-color:black; color:white; border:none; border-radius:4px; cursor:pointer;">Send</button>
+    <p id="messageStatus" style="margin-top:8px; font-size:13px; color:#666;"></p>
+  </div>
+</div>
 
 
 
