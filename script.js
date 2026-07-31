@@ -142,6 +142,12 @@ morganaScreenClose.addEventListener("click", () => closeWindow(morganaScreen));
 dragElement(morganaScreen);
 addWindowTapHandling(morganaScreen);
 
+initializeWindow("calendar")
+initializeIcon("calendar")
+document.querySelector("#calendarclose").addEventListener("click", () => closeWindow(document.querySelector("#calendar")));
+
+
+
 
 var biggestIndex = 1;
 
@@ -338,8 +344,9 @@ function addToBackgroundsSideBar(index) {
   newDiv.style.cursor = "pointer";
   newDiv.style.padding = "8px";
   newDiv.style.marginBottom = "8px";
-  newDiv.style.borderRadius = "8px";
-  newDiv.style.backgroundColor = "#f2f2f2";
+
+  newDiv.style.backgroundColor = "#ffff";
+  newDiv.style.border = "5px solid black";
 
   newDiv.innerHTML = `<p style="margin: 0px; font-weight: bold; font-size: 14px;">${bg.title}</p>`;
 
@@ -396,10 +403,10 @@ function addToSideBar(index) {
  
   var newDiv = document.createElement("div");
   newDiv.style.cursor = "pointer";
-  newDiv.style.padding = "8px";
+  newDiv.style.padding = "6px";
   newDiv.style.marginBottom = "8px";
-  newDiv.style.borderRadius = "8px";
-  newDiv.style.backgroundColor = "#f2f2f2";
+  newDiv.style.backgroundColor = "#ffff";
+  newDiv.style.border = "5px solid black";
  
   newDiv.innerHTML = `
     <p style="margin: 0px; font-weight: bold; font-size: 14px;">${note.title}</p>
@@ -489,6 +496,126 @@ morganaClicker.addEventListener("click",function(){
 
 
 });
+
+
+
+
+
+
+// Calendar
+var calendarMonthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var calendarWeekdayLabels = ["S","M","T","W","T","F","S"];
+
+var calendarMonths = [];
+
+for(var cy = 2026;cy<= 2028;cy++){
+  for(var cm = 0; cm<= 11;cm++){
+    calendarMonths.push({ year: cy, month: cm})
+  }
+}
+
+function buildMonthGridHTML(year,month){
+  var today = new Date();
+  var isCurrentMonth = (today.getFullYear() === year && today.getMonth() === month);
+  var todayDate = today.getDate();
+
+  var firstWeekday = new Date(year, month, 1).getDay();
+  var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  var html = `<h2 style="font-family:'personafont';font-size:45px;margin:0 0 8px 0;text-align:center;">${calendarMonthNames[month]} ${year}</h2>`;
+
+  html += `<div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:12px;color:#666;margin-bottom:4px;">`;
+  calendarWeekdayLabels.forEach(function(d) { html += `<div>${d}</div>`; });
+  html += `</div>`;
+
+  html += `<div style="display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:65px;gap:4px;">`;
+
+  for (var i = 0; i < firstWeekday; i++) {
+    html += `<div></div>`;
+  }
+
+  for (var day = 1; day <= daysInMonth; day++) {
+    var isToday = isCurrentMonth && day === todayDate;
+    var bg = isToday ? "#ff0000" : "#f2f2f2";
+    var color = isToday ? "white" : "#333";
+    var fontWeight = isToday ? "bold" : "normal";
+    html += `<div style="display:flex;align-items:center;justify-content:center;font-family:'personafont';font-size:25px;background-color:${bg};color:${color};font-weight:${fontWeight};">${day}</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+
+var calendarContent = calendarMonths.map(function(m) {
+  return {
+    title: calendarMonthNames[m.month] + " " + m.year,
+    date: "",
+    content: buildMonthGridHTML(m.year, m.month)
+  };
+});
+
+var currentCalendarPage = 0;
+
+function setCalendarPageContent(index) {
+  var calendarPageContent = document.querySelector("#calendarpageContent");
+  calendarPageContent.innerHTML = calendarContent[index].content;
+  currentCalendarPage = index;
+}
+
+function addToCalendarSideBar(index) {
+  var sidebar = document.querySelector("#calendarsidebar");
+  var m = calendarContent[index];
+  var monthInfo = calendarMonths[index];
+
+  var today = new Date();
+  var isCurrentMonth = (monthInfo.year === today.getFullYear() && monthInfo.month === today.getMonth());
+
+
+  var newDiv = document.createElement("div");
+  newDiv.style.cursor = "pointer";
+  newDiv.style.padding = "8px";
+  newDiv.style.marginBottom = "8px";
+  newDiv.style.backgroundColor = isCurrentMonth ? "#ff0000" : "#f2f2f2";
+  newDiv.style.fontSize = "13px";
+  newDiv.style.fontFamily = 'personafont';
+
+  newDiv.style.border = "5px solid black";
+
+  var shortYear = "'" + String(monthInfo.year).slice(-2);
+  var shortLabel = calendarMonthNames[monthInfo.month].slice(0, 3) + " " + shortYear;
+  newDiv.innerHTML = `<p style="margin: 0px; font-weight: bold; font-size: 22px;">${shortLabel}</p>`;
+
+  newDiv.addEventListener("click", function() {
+    setCalendarPageContent(index);
+  });
+
+  sidebar.appendChild(newDiv);
+}
+
+for (var ci = 0; ci < calendarContent.length; ci++) {
+  addToCalendarSideBar(ci);
+}
+
+(function openOnTodaysMonth() {
+  var today = new Date();
+  var idx = calendarMonths.findIndex(function(m) {
+    return m.year === today.getFullYear() && m.month === today.getMonth();
+  });
+  setCalendarPageContent(idx >= 0 ? idx : 0);
+})();
+
+function flipCalendarPage() {
+  var nextIndex = currentCalendarPage + 1;
+  if (nextIndex >= calendarContent.length) nextIndex = 0;
+  setCalendarPageContent(nextIndex);
+}
+document.querySelector("#calendarnextPageButton").addEventListener("click", flipCalendarPage);
+
+
+
+
+
 
 
 
