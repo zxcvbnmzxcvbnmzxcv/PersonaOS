@@ -119,6 +119,15 @@ document.addEventListener("click", function(e) {
   }
 });
 
+
+var morganaClickSound = new Audio("what.wav");
+
+var morganapowerClickSound = new Audio("letsgetthem.wav");
+
+var autoclickerClickSound = new Audio("nice.wav");
+
+var cantbuy = new Audio("itstoosoon.wav");
+
 var morganaClickPower = 1;
 var morganaUpgradeCost = 300;
 
@@ -126,8 +135,21 @@ var morganaUpgradeButton = document.querySelector("#morganaUpgrade");
 var morganaUpgradeCostDisplay = document.querySelector("#morganaUpgradeCost");
 var morganaPowerDisplay = document.querySelector("#morganaPowerDisplay");
 
+
+var autoclickerPower = 0;
+var autoclickerUpgradeCost = 100;
+
+var autoclickerUpgradeButton = document.querySelector("#autoclickerUpgrade");
+var autoclickerUpgradeCostDisplay = document.querySelector("#autoclickerUpgradeCost");
+var autoclickerPowerDisplay = document.querySelector("#autoclickerPowerDisplay");
+
+
+
+
 morganaUpgradeButton.addEventListener("click", function() {
   if (morganaCount >= morganaUpgradeCost) {
+    morganapowerClickSound.currentTime = 0;
+    morganapowerClickSound.play();
     morganaCount -= morganaUpgradeCost;
     morganaClickPower += 1;
     morganaUpgradeCost += 100;
@@ -136,7 +158,43 @@ morganaUpgradeButton.addEventListener("click", function() {
     morganaPowerDisplay.textContent = morganaClickPower;
     morganaUpgradeCostDisplay.textContent = morganaUpgradeCost;
   }
+  else{
+    cantbuy.currentTime = 0;
+    cantbuy.play();
+  }
+
 });
+
+
+autoclickerUpgradeButton.addEventListener("click", function() {
+  if (morganaCount >= autoclickerUpgradeCost) {
+    autoclickerClickSound.currentTime = 0;
+    autoclickerClickSound.play();
+    morganaCount -= autoclickerUpgradeCost;
+    autoclickerPower += 1;
+    autoclickerUpgradeCost += 100;
+
+    morganaCountDisplay.textContent = morganaCount;
+    autoclickerPowerDisplay.textContent = autoclickerPower;
+    autoclickerUpgradeCostDisplay.textContent = autoclickerUpgradeCost;
+  }
+  else{
+    cantbuy.currentTime = 0;
+    cantbuy.play();
+  }
+});
+
+setInterval(function() {
+  morganaCount += autoclickerPower;
+  morganaCountDisplay.textContent = morganaCount;
+}, 1500);
+
+
+
+
+
+
+
 
 function handleIconTap(element,screen) {
   if (element.classList.contains("selected")) {
@@ -518,6 +576,10 @@ var morganaCountDisplay = document.querySelector("#morganaCount");
 var Mona = document.querySelector("#morganamessage");
 
 morganaClicker.addEventListener("click",function(){
+
+  morganaClickSound.currentTime = .1;
+  morganaClickSound.play();
+
   morganaCount += morganaClickPower;
   morganaCountDisplay.textContent = morganaCount;
 
