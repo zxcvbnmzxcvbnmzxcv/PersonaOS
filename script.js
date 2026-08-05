@@ -231,6 +231,11 @@ initializeWindow("browser")
 initializeIcon("browser")
 document.querySelector("#browserclose").addEventListener("click", () => closeWindow(document.querySelector("#browser")));
 
+initializeWindow("youtube")
+initializeIcon("youtube")
+document.querySelector("#youtubeclose").addEventListener("click", () => closeWindow(document.querySelector("#youtube")));
+
+
 function searchWikipedia() {
   var query = document.querySelector("#wikipediaSearchInput").value;
   if (query.trim() === "") return;
@@ -324,6 +329,7 @@ function initializeIcon(name) {
 initializeIcon("bear")
 initializeIcon("backgrounds")
 initializeIcon("morgana")
+
 
 
 
@@ -635,8 +641,11 @@ morganaClicker.addEventListener("click",function(){
   }
   else if (morganaCount < 10000)
     {Mona.textContent = "ajidoaiaad";
-  }
 
+  }
+  else if (morganaCount < 12000){
+    Mona.textContent = "aspkopkosakposaposka";
+  }
 
 
 
