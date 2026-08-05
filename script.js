@@ -193,10 +193,11 @@ setInterval(function() {
 
 
 
-
+  var icontapsound = new Audio("tapsoundeffect");
 
 
 function handleIconTap(element,screen) {
+
   if (element.classList.contains("selected")) {
     deselectIcon(element)
     openWindow(screen)
@@ -625,6 +626,15 @@ morganaClicker.addEventListener("click",function(){
   }
   else if (morganaCount < 1000)
     {Mona.textContent = "Morgana Obsessed";
+  }
+  else if (morganaCount < 2000)
+    {Mona.textContent = "Morgana #1 fan";
+  }
+  else if (morganaCount < 5000)
+    {Mona.textContent = "mmmmm";
+  }
+  else if (morganaCount < 10000)
+    {Mona.textContent = "ajidoaiaad";
   }
 
 
